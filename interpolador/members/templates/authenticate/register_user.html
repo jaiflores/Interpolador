@@ -1,0 +1,36 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Cadastre-se {% endblock %}
+
+{% block inicial %}
+<center>
+<form action="{% url 'register_user' %}" method=POST>
+    {% csrf_token %}
+    
+    <div class="container">
+        <label class="formlabel" for="username">Username</label><br>
+        <input class="form" type="text" name="username" id="username"><br>
+
+        <label class="formlabel" for="first_name">Nome:</label><br>
+        <input class="form" type="text" name="first_name" id="first_name"><br>
+        
+        <label class="formlabel" for="email">E-mail:</label><br>
+        <input class="form" type="email" name="email" id="email"><br>
+
+        <label class="formlabel" for="password1">Password:</label><br>
+        <input class="form" type="password" name="password1" id="password1">
+
+        <label class="formlabel" for="password2">Confirme o Password:</label><br>
+        <input class="form" type="password" name="password2" id="password2">
+    </div>    
+        <div>
+            <center>
+            <input type="submit" class="loginbtn" value="Registrar">
+            <input type="submit" class="cancelbtn" value="Cancel"><br>
+            <span> Já é cadastrado? <a href="{% url 'login' %}">Login</a></span>
+            </center>
+        </div>
+    </div>    
+</form>
+</center>
+{% endblock %}

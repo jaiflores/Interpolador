@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block inicial %}
+<div class="page-container">
+    
+    {% if user.is_authenticated %}
+    <h2 class="hor2">Olá, {{ user }}</h2>
+    {% else %}
+        <center>
+            <div class="page-container container">
+                    <h1>Você precisa estar logado para ver essa pagina!</h1><br><br>
+                
+                    <a href="{% url 'login' %}" id="login">
+                        <button type="submit" class="loginbtn" style="width: 10%;">Login</button>
+                    </a>
+            </div>
+        </center>  
+    {% endif %}
+</div>
+
+{% endblock %}

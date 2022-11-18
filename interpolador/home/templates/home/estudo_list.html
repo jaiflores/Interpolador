@@ -1,0 +1,53 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Lista de estudos {% endblock %}
+
+{% block inicial %}
+
+{% if user.is_authenticated %}
+
+    <h1>Lista de Estudos</h1><br>
+    <br>
+    <h2>Instrução:</h2>
+        <p>Nessa página você encontra a lista com seus estudos adicionado ao site.</p>
+        <p>Além disse, nessa página você pode ver cada estudo com seus detales e conferir as informações. <br>
+           Caso queira atualizar, deletar ou enviar para analaze você encontrará abaixo botões para cada função!
+        </p>
+    <table id="tabela">
+        <br>
+        {% for estudo in estudo_list %}
+            {% if user.id == estudo.owner %}
+                <tr>
+                    <td id="tabela1">
+                        <a href="{% url 'home:show_estudo' estudo.id %}" class="lista">{{ estudo }}</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'home:update_estudo' estudo.id %}" class="lista">Enviar</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'home:estudo_text' estudo.id %}" class="lista">Baixar</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'home:update_estudo' estudo.id %}" class="lista">Atualizar</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'home:delete_estudo' estudo.id %}" class="lista" id="tabela1" style="color: red ;"> Deletar </a>
+                    </td>
+                </tr>
+            {% endif %}    
+        {% endfor %}
+    </table>
+    <br>  
+{% else %}
+    <center>
+        <div class="page-container container">
+                <h1>Você precisa estar logado para ver essa pagina!</h1><br><br>
+            
+                <a href="{% url 'login' %}" id="login">
+                    <button type="submit" class="loginbtn" style="width: 10%;">Login</button>
+                </a>
+        </div>
+    </center>  
+{% endif %}
+
+{% endblock %}

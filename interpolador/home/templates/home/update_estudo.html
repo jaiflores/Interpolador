@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Atualizar estudo {% endblock %}
+
+{% block inicial %}
+{% if user.is_authenticated %}
+<center>
+    <form action="" method=POST>
+        {% csrf_token %}
+        <div class="form-estudo">
+            <label class="formlabel-estudo" for="name_study">Nome do estudo*:</label><br>
+            <input class="form" type="text" name="name_study" id="name_study"><br>
+    
+            <label class="formlabel-estudo" for="descricao">Descrição do Estudo:</label><br>
+            <input class="form" type="text" name="descricao" id="descricao"><br>
+            
+            <div class="form-x-y">
+                <div class="form-estudo-div">
+                    <label class="formlabel-estudo" for="x">Valor de x:</label><br>
+                    <input class="formlabel-estudo-div" type="text" name="x" id="x">
+                </div>
+
+                <div class="form-estudo-div">
+                    <label class="formlabel-estudo" for="y">Valor de y:</label><br>
+                    <input class="formlabel-estudo-div" type="text" name="y" id="y">
+                </div>
+                <br><br>
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Atualizar" class="loginbtn"> 
+                <input type="submit" value="Cancelar" class="cancelbtn">
+            </div>
+        </div>
+    </form>
+</center>
+    {% else %}
+    <center>
+        <div id="page-container">
+            <h1>Você precisa estar logado para ver essa pagina!</h1>
+            
+            <a href="{% url 'login' %}" id="login">
+                <button type="submit" class="btnlogin" style="width: 30%;">Login</button>
+            </a>
+        </div>
+    </center>  
+    {% endif %}
+{% endblock %}

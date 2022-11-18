@@ -1,0 +1,42 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Pesquisa de estudo {% endblock %}
+
+{% block inicial %} 
+<div id="page-container">
+    <div id="content-wrap">
+        {% if user.is_authenticated %}
+            {% if searched %}
+                {% for estudo in estudos %}
+                <br><br>
+                    <h1>O estudo pesquisado foi:</h1>
+                    <br>
+                    <div class="card">
+                        <div class="card-header hor">
+                            <a href="{% url 'home:update_estudo' estudo.id %}" class="lista"><h3>Estudo id: {{ estudo.id }} </h3>
+                                <h3>Nome do estudo: {{ estudo.name_study }} </h3></a>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            {% else %}
+                <h1>Algo de errado não está certo!</h1>
+
+            {% endif %}
+        {% else %}
+            <center>
+                <div id="page-container">
+                    <div id="content-wrap">
+                        <h1>Você precisa estar logado para ver essa pagina!</h1>
+                    
+                        <a href="{% url 'login' %}" id="login">
+                            <button type="submit" class="btnlogin" style="width: 30%;">Login</button>
+                        </a>
+                    </div>
+                </div>
+            </center>  
+        {% endif %}
+    </div>    
+</div>
+
+{% endblock %}

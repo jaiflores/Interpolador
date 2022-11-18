@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <style>
+        :root{
+            --bg1: whitesmoke;
+            --bg2: rgb(56, 123, 201);
+            --bg3: rgba(239, 59, 57, 1.00);
+            --bg4: rgb(83, 255, 40);
+            --bg5: rgba(185, 159, 255, 0.767);
+            --colr1: white;
+            --colr2: black;
+            --colr3: rgba(105, 87, 170, 0.5);
+            --colr4: rgba(247, 135, 133, 1.0);
+            --radius: 0.5em;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .hor {
+            display: flex;
+        }
+        /* Menu da navbar */
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: var(--bg5);
+        }
+
+        li {
+            float: right;
+            border-right:1px solid #bbb;
+        }
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            border-right:1px solid #bbb;
+            background-color: var(--bg5);
+        }
+        .pesquisa {
+            display: block;
+            text-align: center;
+            padding: 5px 8px;
+            text-decoration: none;
+            margin-top: 8px;
+        }
+        .pesquisa-btn {
+            display: block;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            background-color: var(--bg5);
+            border-color: var(--bg5);
+            box-shadow: none;
+            cursor: pointer;
+
+        }
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+        .active {
+            background-color: rgb(4, 170, 109);
+        }
+        .inter{
+            float: left; 
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        /* Rodapé */
+        #rodape{
+            bottom: 0;
+            position: fixed;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            height: 2.5rem;
+            text-align: center;
+            width: 100%;
+        }
+        .font3{
+            font-size: 1rem;
+            margin-top: 5px;
+            color: var(--colr2);
+        }
+        .lista{
+            display: inline;
+            list-style: none;
+            text-decoration:none;
+            color: var(--bg2);
+        }
+        /* Fonte da lista de estudo */
+        .font-estudo{
+            color: var(--colr2);
+            margin-left: 2%;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        .font-estudo span{
+            color: var(--colr2);
+            font-size: 1.3rem;
+            font-weight: normal;
+        }
+        /* Botoes */
+        .loginbtn {
+            background-color: var(--bg4);
+            width: 100px;
+            height: 40px;
+            padding: 14px 20px;
+            margin: 5px 0;
+            border: none;
+            cursor: pointer;
+            border-radius: var(--radius);
+            color: var(--colr2);
+        }
+        .cancelbtn{
+            background-color: red;
+            color: var(--colr2);
+            width: 100px;
+            height: 40px;
+            padding: 14px 20px;
+            margin: 5px 0;
+            border: none;
+            cursor: pointer;
+            border-radius: var(--radius);
+        }
+        button:hover {
+            opacity: 0.7;
+        }
+        /* Div inicial */
+        .container {
+            padding: 15px;
+            margin: 2%;
+        }
+        .page-container {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+        /* Div de senha e cadastro */
+        .form{
+            width: 30%;
+            padding: 12px 20px;
+            margin: 3px 0;
+            border: 1px solid var(--bg2);
+            box-sizing: border-box;
+        }
+        .formlabel{
+            color: var(--bg2);
+            font-size: 1.5rem;
+        }
+        /* Formatação do formulario de registro */
+        input[type=password]{
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: flex;
+            border: 1px solid var(--bg2);
+            box-sizing: border-box;
+        }
+        /* Div para cadastro de estudo */
+        .form-estudo{
+            width: 80%;
+            padding: 12px 20px;
+            margin: 3px 0;
+            box-sizing: border-box;
+        }
+        .formlabel-estudo{
+            color: var(--bg2);
+            font-size: 1.5rem;
+        }
+        /* Div para cadastro de "x" e "y" */
+        .form-x-y{
+            display: flex;
+            width: 80%;
+            justify-content: center;
+        }
+        .form-estudo-div{
+            display: inline-block;
+        }
+        .formlabel-estudo-div{
+            width: 50%;
+            padding: 12px 20px;
+        }
+        /* Lista de Estudo  */
+        .card {
+            position:relative;
+            display:flex;
+            flex-direction:column;
+            width: 50%;
+            word-wrap:break-word;
+            background-color: var(--colr1);
+            background-clip:border-box;
+            border:1px solid rgba(0,0,0,.125);
+            border-radius:.25rem;
+        }
+        .card hr{
+            margin-right:0;
+            margin-left:0;
+        }
+        .card-header{
+            padding: .5rem 1rem;
+            background-color: rgba(0,0,0,.03);
+            border-bottom: 1px solid rgba(0,0,0,.125);
+        }
+        .card-body{
+            flex: 1 1 auto;
+            padding: 1rem 1rem;
+        }
+        .card-title{
+            margin-bottom:.5rem;
+        }
+        /* Tabelas da lista de estudo */
+        #tabela{
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+            margin-left: 2%;
+        }
+        #tabela1{
+            width: 100%;
+        }
+        #tabela td{
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #tabela td:hover {
+            background-color: #ddd;
+        }
+        .page-container{
+            margin-left: 2%;
+        }
+    </style>
+</head>
+<body style="background-color: var(--bg1);">
+    <header>
+        <ul>
+            <li class="inter"><h3>Interpolador</h3></li>
+
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" id="logout">Logout</a></li>
+            <form action="{% url 'home:search_estudo' %}" method=POST>
+                {% csrf_token %}
+                <li><a><input type="submit" class="pesquisa-btn" value="Pesquisar"></a></li>
+                <li><input type="search" class="pesquisa" name="searched"></li>
+            </form>
+            <li><a href="{% url 'home:estudo_list' %}">Lista de Estudo</a></li>
+            <li><a href="{% url 'home:add_estudo' %}">Adicionar Estudo</a></li>
+            <li><a href="{% url 'home:home' %}">Home</a></li>
+            {% else %}
+            <li><a href="{% url 'register_user' %}">Cadastre-se</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+
+            {% endif %}
+        </ul>
+    </header>
+
+    <div class="page-container">
+        {% block inicial %}
+        {% endblock %}
+    </div>
+
+    <footer class="hor">
+        <div id="rodape" class="barra1 font3">
+            <p>Copyright © 2022 Dornelles. All rights reserved.</p>
+            <nav>
+                <a href="{% url 'home:home' %}" class="lista">Home |</a>
+                <a href="{% url 'login' %}" id="login" class="lista">Login |</a>
+                <a href="{% url 'register_user' %}" class="lista">Sign Up</a>
+                {% if user.is_authenticated %}
+
+                <a href="{% url 'logout' %}" id="logout" class="lista">| Logout</a>
+                {% endif %}
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

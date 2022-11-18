@@ -1,0 +1,53 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Visualizar estudo {% endblock %}
+
+{% block inicial %} 
+<br><br>
+<div class="page-container container">
+    {% if user.is_authenticated %}
+        {% for estudo in estudo_list %}
+            {% if user.id == estudo.owner %}
+                <div class="card">
+                    <div class="card-header">
+                        <center><h3>{{ estudo.name_study }} </h3></center>
+                    </div>
+                    <br>
+                    <p class="font-estudo">Descrição do estudo: 
+                        <span>{{ estudo.descricao }}</span>
+                    </p>
+                    <br>
+                    
+                    <p class="font-estudo">Valor de x e y: 
+                    <span class="font-estudo">({{ estudo.xy }})</span>
+                    </p>    
+                    <br>
+                </div>
+                <div>
+                    <a href="{% url 'home:update_estudo' estudo.id %}"><input type="submit" value="Atualizar" class="loginbtn"></a>
+                </div>
+            {% else %}
+                <br>
+                <h1>Este estudo não esta disponivel!</h1>
+                <br>
+                <p><strong>Responsabel por esse estudo:</strong> <span style="color: red ;">{{ estudo.usuario_user_id }}</span> <strong>e seu id é:</strong> <span style="color: red ;">{{ estudo.usuario_user_id.id }}</span></p> 
+                <br>
+                <p><strong>Você é:</strong> <span style="color: red ;">{{ user }}</span> <strong>e seu id é:</strong><span style="color: red ;"> {{ user.id }}</span></p>
+            {% endif %}    
+        {% endfor %}
+    {% else %}
+        <center>
+            <div id="page-container">
+                <h1>Você precisa estar logado para ver essa pagina!</h1>
+                
+                <a href="{% url 'login' %}" id="login">
+                    <button type="submit" class="btnlogin" style="width: 30%;">Login</button>
+                </a>
+            </div>
+        </center>  
+    {% endif %}
+</div>
+
+
+
+{% endblock %}

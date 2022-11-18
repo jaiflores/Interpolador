@@ -1,0 +1,41 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Adicionar estudo {% endblock %}
+
+{% block inicial %}
+
+{% if user.is_authenticated %}
+<center><br><br>
+<form action="" method=POST>
+    {% csrf_token %}
+    <div class="form-estudo">
+        <label class="formlabel-estudo" for="name_study">Nome do estudo*:</label><br>
+        <input class="form" type="text" name="name_study" id="name_study" required><br>
+
+        <label class="formlabel-estudo" for="descricao">Descrição do Estudo:</label><br>
+        <input class="form" type="text" name="descricao" id="descricao"><br><br>
+        
+        <label class="formlabel-estudo" for="xy">Valor de x e y:</label><br><br>
+        <p>X e Y <strong>DEVEM</strong> ser separados por <strong>;</strong>. <br> Cada dupla tem que estar em uma linha.</p><br>
+        <textarea rows="10" class="form" type="text" name="xy" id="xy" required></textarea>
+
+        <br>
+        <div>
+            <input type="submit" value="Adicionar" class="loginbtn"> 
+            <input type="reset" value="Cancelar" class="cancelbtn">
+        </div>
+    </div>
+</form>
+</center>
+{% else %}
+    <center>
+        <div class="page-container container">
+                <h1>Você precisa estar logado para ver essa pagina!</h1><br><br>
+            
+                <a href="{% url 'login' %}" id="login">
+                    <button type="submit" class="loginbtn" style="width: 10%;">Login</button>
+                </a>
+        </div>
+    </center>   
+{% endif %}
+{% endblock %}
